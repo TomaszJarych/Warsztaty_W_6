@@ -23,36 +23,34 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "pl.coderslab.Repository")
 public class AppConfig extends WebMvcConfigurerAdapter {
-    @Bean
-    public LocalEntityManagerFactoryBean entityManagerFactory() {
-	LocalEntityManagerFactoryBean emfb = new LocalEntityManagerFactoryBean();
-	emfb.setPersistenceUnitName("Warsztaty_W_6");
-	return emfb;
-    }
+  @Bean
+  public LocalEntityManagerFactoryBean entityManagerFactory() {
+    LocalEntityManagerFactoryBean emfb = new LocalEntityManagerFactoryBean();
+    emfb.setPersistenceUnitName("Warsztaty_W_6");
+    return emfb;
+  }
 
-    @Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
-	JpaTransactionManager tm = new JpaTransactionManager(emf);
-	return tm;
-    }
+  @Bean
+  public JpaTransactionManager transactionManager(EntityManagerFactory emf) {
+    JpaTransactionManager tm = new JpaTransactionManager(emf);
+    return tm;
+  }
 
-    @Bean
-    public ViewResolver viewResolver() {
-	InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-	viewResolver.setPrefix("/WEB-INF/views/");
-	viewResolver.setSuffix(".jsp");
-	return viewResolver;
-    }
+  @Bean
+  public ViewResolver viewResolver() {
+    InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+    viewResolver.setPrefix("/WEB-INF/views/");
+    viewResolver.setSuffix(".jsp");
+    return viewResolver;
+  }
 
+  @Bean
+  public Validator validator() {
+    return new LocalValidatorFactoryBean();
+  }
 
-    @Bean
-    public Validator validator() {
-	return new LocalValidatorFactoryBean();
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-	registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-    }
-
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+  }
 }

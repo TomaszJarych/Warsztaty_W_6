@@ -1,10 +1,8 @@
 package pl.coderslab.Service;
 
-import pl.coderslab.Dto.UserDto;
+import pl.coderslab.dto.UserDto;
 
-public interface UserService{
+public interface UserService extends BaseCrudService<UserDto, Long> {
 
-	UserDto register(UserDto dto);
-
-	Boolean login(UserDto dto);
+  Boolean login(UserDto dto);
 }

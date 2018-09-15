@@ -7,23 +7,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-@RequestMapping("/")
 @Controller
-@SessionAttributes("isLoggedIn")
+@RequestMapping("/")
+@SessionAttributes(names = "isLoggedIn")
 public class HomeController {
 
-	@GetMapping
-	public ModelAndView getIndexPage(
-			@ModelAttribute("isLoggedIn") Boolean isloggedIn) {
-		if (isloggedIn) {
-			return new ModelAndView("index");
-		}
-		return new ModelAndView("redirect:/login");
-	}
+  @GetMapping
+  public ModelAndView indexPage(@ModelAttribute("isLoggedIn") Boolean isloggedIn) {
+    if (isloggedIn) {
+      return new ModelAndView("redirect:/user/homePage");
+    }
+    return new ModelAndView("index");
+  }
 
-	@ModelAttribute("isLoggedIn")
-	public boolean isLogged() {
-
-		return false;
-	}
+  @ModelAttribute(name = "isLoggedIn")
+  public Boolean isLoggedIn() {
+    return false;
+  }
 }
