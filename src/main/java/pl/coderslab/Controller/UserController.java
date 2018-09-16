@@ -29,7 +29,7 @@ public class UserController {
   private final TweetService tweetService;
 
   @Autowired
-  public UserController(UserService userService,TweetService tweetService) {
+  public UserController(UserService userService, TweetService tweetService) {
     this.userService = userService;
     this.tweetService = tweetService;
   }
@@ -44,7 +44,8 @@ public class UserController {
   public ModelAndView processRegisterNewUser(
       @Valid @ModelAttribute("userDto") UserDto dto,
       BindingResult result,
-      @SessionAttribute("isLoggedIn") Boolean isLoggedIn, Model model) {
+      @SessionAttribute("isLoggedIn") Boolean isLoggedIn,
+      Model model) {
     if (result.hasErrors()) {
       return new ModelAndView("user/register");
     }
@@ -71,29 +72,28 @@ public class UserController {
       dto = user;
       model.addAttribute("isLoggedIn", true);
       model.addAttribute("userDto", user);
-      model.addAttribute("tweets", tweetService.findAllByUser(user));
       return new ModelAndView("redirect:/user/index");
     }
     return new ModelAndView("user/login");
   }
-  
-  
+
   @GetMapping("/index")
-  public ModelAndView showHomePage(@ModelAttribute("userDto") UserDto dto,
-	      @SessionAttribute("isLoggedIn") Boolean isLoggedIn,
-	      Model model) {
-	  
-	  
-	  return new ModelAndView("user/userHomePage");
+  public ModelAndView showHomePage(
+      @ModelAttribute("userDto") UserDto dto,
+      @SessionAttribute("isLoggedIn") Boolean isLoggedIn,
+      Model model) {
+    model.addAttribute("tweets", tweetService.findAllByUser(dto));
+
+    return new ModelAndView("user/userHomePage");
   }
-  
+
   @GetMapping("/logout")
   public ModelAndView logoutUser(Model model) {
-	  
-	  model.addAttribute("isLoggedIn", false);
-      model.addAttribute("userDto", new UserDto());
-	  
-      return new ModelAndView("redirect:/");
+
+    model.addAttribute("isLoggedIn", false);
+    model.addAttribute("userDto", new UserDto());
+
+    return new ModelAndView("redirect:/");
   }
 
   @ModelAttribute("userDto")

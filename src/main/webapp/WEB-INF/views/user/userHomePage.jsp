@@ -12,8 +12,6 @@
 	<h2>Greetings traveler!</h2>
 	<br>
 	<br>
-	<h1>${userDto}</h1>
-	<h1>${isLoggedIn}</h1>
 
 	<h1 align="center">Tweet list:</h1>
 
@@ -21,16 +19,14 @@
 		<tr>
 			<th>Created</th>
 			<th>Content</th>
-			<th>User</th>
 			<th>Action</th>
 		</tr>
 		<c:forEach items="${tweets }" var="tweet">
 			<tr>
 				<td align="center">${tweet.created}</td>
 				<td align="center">${tweet.text}</td>
-				<td align="center">${tweet.user.name}</td>
-				<td align="center"><a href=".tweet/update/${tweet.id}">Edit</a> | <a
-					href=".tweet/delete/${tweet.id}"> Delete</a></td>
+				<td align="center"><a href="../tweet/update/${tweet.id}">Edit</a> | <a
+					href="../tweet/delete/${tweet.id}"> Delete</a></td>
 			</tr>
 
 

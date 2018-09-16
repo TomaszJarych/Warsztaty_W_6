@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pl.coderslab.dto.UserDto;
 
@@ -38,6 +39,7 @@ public class User {
   private Boolean enabled;
 
   @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+  @EqualsAndHashCode.Exclude
   private Set<Tweet> tweets = new LinkedHashSet<>();
 
   @Column(unique = true)

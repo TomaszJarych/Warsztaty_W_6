@@ -12,13 +12,14 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pl.coderslab.dto.TweetDto;
 
 @Entity
 @Table(name = "tweets")
-@Data
 @NoArgsConstructor
+@Data
 public class Tweet {
 
   @Id
@@ -31,6 +32,7 @@ public class Tweet {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
+  @EqualsAndHashCode.Exclude
   private User user;
 
   @Transient
