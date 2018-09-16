@@ -9,11 +9,11 @@
 </head>
 <body>
 
-<h1>Witaj na dwitterze!</h1>
+<h1>CL Twitter!</h1>
 
     <div>
         <button>
-            <a href="login">Logowanie</a>
+            <a href="user/login">Logowanie</a>
         </button>
     </div>
     <div>

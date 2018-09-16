@@ -36,6 +36,7 @@ public class UserServiceImplementation implements UserService {
 
   @Override
   public UserDto update(UserDto dto) {
+	  
     return userRepo.save(toUserEntity(dto)).toDto();
   }
 
@@ -51,12 +52,15 @@ public class UserServiceImplementation implements UserService {
   }
 
   @Override
-  public Boolean login(UserDto dto) {
+  public UserDto login(UserDto dto) {
     User user = userRepo.findByEmail(dto.getEmail());
     if (Objects.isNull(user)) {
-      return false;
+      return null;
     }
-    return BCrypt.checkpw(dto.getPassword(), user.getPassword());
+    if (BCrypt.checkpw(dto.getPassword(), user.getPassword())) {
+      return user.toDto();
+    }
+    return null;
   }
 
   private User toUserEntity(UserDto dto) {

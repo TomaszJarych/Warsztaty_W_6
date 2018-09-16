@@ -1,10 +1,16 @@
 package pl.coderslab.entity;
 
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -31,6 +37,9 @@ public class User {
 
   private Boolean enabled;
 
+  @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+  private Set<Tweet> tweets = new LinkedHashSet<>();
+
   @Column(unique = true)
   private String email;
 
@@ -41,6 +50,27 @@ public class User {
     dto.setUsername(getUsername());
     dto.setEnabled(getEnabled());
     dto.setEmail(getEmail());
+    dto.setPassword(getPassword());
+    if (Objects.nonNull(getTweets()) && !getTweets().isEmpty()) {
+      dto.getTweets().clear();
+      getTweets()
+          .stream()
+          .filter(Objects::nonNull)
+          .map(Tweet::toDto)
+          .forEach(el -> dto.getTweets().add(el));
+    }
+
+    return dto;
+  }
+
+  @Transient
+  public UserDto toSimpleDto() {
+    UserDto dto = new UserDto();
+    dto.setId(getId());
+    dto.setUsername(getUsername());
+    dto.setEnabled(getEnabled());
+    dto.setEmail(getEmail());
+    dto.setPassword(getPassword());
 
     return dto;
   }

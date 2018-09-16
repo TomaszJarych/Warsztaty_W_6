@@ -6,17 +6,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>User form</title>
+<title>Login user</title>
 </head>
 <body>
-	<h1 align="center">FORM</h1>
+	<h1 align="center">Login user</h1>
 
-	<form:form method="post" modelAttribute="userDto" action="register">
-		<div>
-			<label>User name</label>
-			<form:input path="username" />
-			<form:errors path="username" cssStyle="color:red;" />
-		</div>
+	<form:form method="post" modelAttribute="userDto" action="login">
 		<div>
 			<label>Email</label>
 			<form:input path="email" />
@@ -27,11 +22,7 @@
 			<form:input path="password" />
 			<form:errors path="password" cssStyle="color:red;" />
 		</div>
-		<div>
-			<label>Is active?</label>
-			<form:checkbox path="enabled"/>
-		</div>
-		<div>
+		
 			<form:hidden path="id" />
 			<input type="submit" value="Send">
 		</div>
