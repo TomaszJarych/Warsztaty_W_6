@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import pl.coderslab.Service.TweetService;
 import pl.coderslab.Service.UserService;
+import pl.coderslab.dto.TweetDto;
 import pl.coderslab.dto.UserDto;
 
 @Controller
@@ -97,7 +98,12 @@ public class UserController {
   }
 
   @ModelAttribute("userDto")
-  public UserDto getUserDto() {
+  private UserDto getUserDto() {
     return new UserDto();
+  }
+  
+  @ModelAttribute("tweet")
+  private TweetDto getTweet() {
+	  return new TweetDto();
   }
 }

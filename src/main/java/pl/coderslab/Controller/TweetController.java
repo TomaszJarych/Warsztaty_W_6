@@ -96,4 +96,18 @@ public class TweetController {
     tweetService.removeFromDB(id);
     return new ModelAndView("redirect:/");
   }
+
+  @GetMapping("/detail/{id}")
+  public ModelAndView showTweetDetail(
+      @SessionAttribute("userDto") UserDto dto,
+      @SessionAttribute("isLoggedIn") Boolean isLoggedIn,
+      @PathVariable("id") Long id, Model model) {
+    if (isLoggedIn == null || isLoggedIn == false || dto.getId() == null) {
+      return new ModelAndView("redirect:/");
+    }
+    
+    model.addAttribute("tweetDetail", tweetService.findById(id));
+
+    return new ModelAndView("tweet/tweetDetail");
+  }
 }
