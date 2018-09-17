@@ -24,12 +24,12 @@ public class HomeController {
   }
 
   @ModelAttribute(name = "isLoggedIn")
-  public Boolean isLoggedIn() {
+  private Boolean isLoggedIn() {
     return false;
   }
 
   @ModelAttribute("userDto")
-  public UserDto getUserDto() {
+  private UserDto getUserDto() {
     return new UserDto();
   }
 }
