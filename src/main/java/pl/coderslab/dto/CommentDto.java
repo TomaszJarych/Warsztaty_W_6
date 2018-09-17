@@ -1,6 +1,7 @@
 package pl.coderslab.dto;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -28,4 +29,10 @@ public class CommentDto {
 	@NotBlank
 	@Size(max=60, message="Maximum number of chars - 60")
 	private String text;
+	
+	public String getFullDate() {
+		  
+	    return this.created.format(DateTimeFormatter.ofPattern("d MMM uuuu  HH:mm:ss"));
+	  }
+	
 }

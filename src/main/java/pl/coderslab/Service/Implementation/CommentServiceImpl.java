@@ -70,6 +70,11 @@ public class CommentServiceImpl implements CommentService {
     return toCommentDtoList(commentRepository.findAllByTweetIdOrderByCreatedDesc(id));
   }
 
+  @Override
+  public Long countByTweetId(Long id) { 
+    return commentRepository.countByTweetId(id);
+  }
+
   private Comment toCommentEntity(CommentDto dto) {
     Comment comment;
 

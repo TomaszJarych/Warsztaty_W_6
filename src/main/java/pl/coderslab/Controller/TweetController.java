@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import pl.coderslab.Repository.TweetRepository;
+import pl.coderslab.Service.CommentService;
 import pl.coderslab.Service.TweetService;
 import pl.coderslab.Service.UserService;
+import pl.coderslab.dto.CommentDto;
 import pl.coderslab.dto.TweetDto;
 import pl.coderslab.dto.UserDto;
 
@@ -28,11 +30,13 @@ public class TweetController {
 
   private final TweetService tweetService;
   private final UserService userService;
+  private final CommentService commentService;
 
   @Autowired
-  public TweetController(TweetService tweetService, UserService userService) {
+  public TweetController(TweetService tweetService, UserService userService,CommentService commentService) {
     this.tweetService = tweetService;
     this.userService = userService;
+    this.commentService = commentService;
   }
 
   @GetMapping("/add")
@@ -107,6 +111,9 @@ public class TweetController {
     }
     
     model.addAttribute("tweetDetail", tweetService.findById(id));
+    model.addAttribute("comments", commentService.findAllByTweetIdOrderByCreatedDesc(id));
+    model.addAttribute("comment", new CommentDto());
+    model.addAttribute("count", commentService.countByTweetId(id));
 
     return new ModelAndView("tweet/tweetDetail");
   }

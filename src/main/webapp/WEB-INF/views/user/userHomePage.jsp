@@ -36,10 +36,6 @@
 				</a> | <a href="../tweet/delete/${tweet.id}"> | Delete</a><a
 					href="../tweet/detail/${tweet.id}""> | Show detail</a></td>
 			</tr>
-			<tr>
-				<td>Liczba komentarzy:</td>
-			</tr>
-
 		</c:forEach>
 	</table>
 

@@ -10,4 +10,6 @@ public interface CommentService extends BaseCrudService<CommentDto, Long> {
 	  List<CommentDto> findAllByTweetOrderByCreatedDesc(TweetDto tweet);
 
 	  List<CommentDto> findAllByTweetIdOrderByCreatedDesc(Long id);
+	  
+	  Long countByTweetId(Long id);
 }

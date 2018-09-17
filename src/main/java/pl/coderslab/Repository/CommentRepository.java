@@ -12,4 +12,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
   List<Comment> findAllByTweetOrderByCreatedDesc(Tweet tweet);
 
   List<Comment> findAllByTweetIdOrderByCreatedDesc(Long id);
+  
+  Long countByTweetId(Long id);
 }
