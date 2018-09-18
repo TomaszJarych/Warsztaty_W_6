@@ -64,6 +64,11 @@ public class TweetServiceImpl implements TweetService {
     return toTweetDtoList(tweetRepository.findAllByUserId(id));
   }
 
+  @Override
+  public Collection<TweetDto> findAllByOrderByCreatedDesc() {
+    return toTweetDtoList(tweetRepository.findAllByOrderByCreatedDesc());
+  }
+
   private Tweet toTweetEntity(TweetDto dto) {
     Tweet tweet;
     if (dto.getId() == null) {

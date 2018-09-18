@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -84,6 +85,7 @@ public class UserController {
       @SessionAttribute("isLoggedIn") Boolean isLoggedIn,
       Model model) {
     model.addAttribute("tweets", tweetService.findAllByUser(dto));
+    model.addAttribute("alltweets", tweetService.findAllByOrderByCreatedDesc());
 
     return new ModelAndView("user/userHomePage");
   }
@@ -97,13 +99,50 @@ public class UserController {
     return new ModelAndView("redirect:/");
   }
 
+  @GetMapping("/editMyProfile")
+  public ModelAndView editUser(Model model) {
+
+    return new ModelAndView("user/register");
+  }
+
+  @PostMapping("/editMyProfile")
+  public ModelAndView processEditUser(
+      @Valid @ModelAttribute("userDto") UserDto dto,
+      BindingResult result,
+      @SessionAttribute("isLoggedIn") Boolean isLoggedIn,
+      Model model) {
+    if (result.hasErrors()) {
+      return new ModelAndView("user/register");
+    }
+    dto = userService.update(dto);
+    model.addAttribute("userDto", dto);
+    return new ModelAndView("redirect:/user/index");
+  }
+
   @ModelAttribute("userDto")
   private UserDto getUserDto() {
     return new UserDto();
   }
-  
+
+  @GetMapping("/deleteUser/{id}")
+  public ModelAndView deleteUser(
+      @ModelAttribute("userDto") UserDto dto,
+      BindingResult result,
+      @SessionAttribute("isLoggedIn") Boolean isLoggedIn,
+      Model model, @PathVariable("id")Long id) {
+    if (isLoggedIn == null || isLoggedIn == false || dto.getId() == null) {
+      return new ModelAndView("redirect:/");
+    }
+    if (id == dto.getId()) {
+    	userService.removeFromDB(id);
+    	model.addAttribute("isLoggedIn", false);
+        model.addAttribute("userDto", new UserDto());
+  }
+    return new ModelAndView("redirect:/");
+  }
+
   @ModelAttribute("tweet")
   private TweetDto getTweet() {
-	  return new TweetDto();
+    return new TweetDto();
   }
 }

@@ -10,6 +10,17 @@
 </head>
 <body>
 
+<div>
+		<h3>Menu</h3>
+		<h4>
+			<a href="${pageContext.request.contextPath}/user/logout">Logout</a>
+			<a href="${pageContext.request.contextPath}/">Index</a>
+			<a href="${pageContext.request.contextPath}/message/showMyMessages">My messages</a>
+			<a href="${pageContext.request.contextPath}/message/add">Send new message</a>
+			<a href="${pageContext.request.contextPath}/user/editMyProfile">Edit profile</a>
+		</h4>
+	</div>
+
 <div align="center">
 	<h1>My messages</h1>
 	

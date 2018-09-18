@@ -21,5 +21,6 @@
             <a href="user/register">Rejestracja</a>
         </button>
     </div>
+    
 </body>
 </html>

@@ -9,6 +9,14 @@
 <title>User form</title>
 </head>
 <body>
+
+	<div>
+		<h3>Menu</h3>
+		<h4>
+			<a href="${pageContext.request.contextPath}/user/logout">Logout</a>
+		</h4>
+	</div>
+
 	<h1 align="center">FORM</h1>
 
 	<form:form method="post" modelAttribute="userDto" action="register">

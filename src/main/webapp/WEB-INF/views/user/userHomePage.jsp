@@ -12,15 +12,21 @@
 	<div>
 		<h3>Menu</h3>
 		<h4>
-			<a href="../user/logout">Logout</a>
+			<a href="${pageContext.request.contextPath}/user/logout">Logout</a>
+			<a href="${pageContext.request.contextPath}/">Index</a>
+			<a href="${pageContext.request.contextPath}/message/showMyMessages"> My messages </a>
+			<a href="${pageContext.request.contextPath}/message/add"> Send new message </a>
+			<a href="${pageContext.request.contextPath}/user/editMyProfile"> Edit profile </a>
+			<a href="${pageContext.request.contextPath}/user/deleteUser/${userDto.id}"> Delete my Profile </a>
 		</h4>
-
 	</div>
+	
 	<h2>Greetings traveler!</h2>
 	<br>
 	<br>
-
-	<h1 align="center">Tweet list:</h1>
+	
+<div>
+	<h1 align="center">Your sTweet list:</h1>
 
 	<table align="center">
 		<tr>
@@ -38,6 +44,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+</div>
 
 	<div align="center">
 		<h1 align="center">Add new Tweet</h1>
@@ -62,5 +69,25 @@
 			</div>
 		</form:form>
 	</div>
+	
+	<div>
+	<h1 align="center">Tweet list:</h1>
+
+	<table align="center">
+		<tr>
+			<th>Created</th>
+			<th>Content</th>
+			<th>Action</th>
+		</tr>
+		<c:forEach items="${alltweets }" var="tweet">
+			<tr>
+				<td align="center">${tweet.fullDate}</td>
+				<td align="center">${tweet.text}</td>
+				<td align="center"><a
+					href="../tweet/detail/${tweet.id}""> Show detail</a></td>
+			</tr>
+		</c:forEach>
+	</table>
+</div>
 </body>
 </html>
